@@ -2,10 +2,11 @@ package com.rehan.librarymanagementsystem.model;
 
 
 import jakarta.persistence.*;
-import org.springframework.boot.autoconfigure.web.WebProperties;
+import lombok.Data;
 
 @Entity
 @Table(name="book")
+@Data
 public class Book {
 
     @Id
@@ -21,5 +22,10 @@ public class Book {
 
     @Column(name="publication_date")
     private java.time.LocalDate publicationDate;
-    
+
+    @Column(name="author_id")
+    private int authorId;
+
+    @Column(name="is_borrowed")
+    private boolean isBorrowed;
 }
