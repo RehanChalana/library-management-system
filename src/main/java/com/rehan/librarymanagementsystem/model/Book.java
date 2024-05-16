@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(name="book")
+@Table(name="books")
 @Data
 public class Book {
 
@@ -17,8 +17,8 @@ public class Book {
     @Column(name="title")
     private String title;
 
-    @Column(name="num_pages")
-    private int numPages;
+    @Column(name="ISBN")
+    private String ISBN;
 
     @Column(name="publication_date")
     private java.time.LocalDate publicationDate;
@@ -26,6 +26,6 @@ public class Book {
     @Column(name="author_id")
     private int authorId;
 
-    @Column(name="is_borrowed")
-    private boolean isBorrowed;
+    @Column(name="genre")
+    private String genre;
 }
