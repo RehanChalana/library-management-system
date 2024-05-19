@@ -17,15 +17,16 @@ public class Book {
     @Column(name="title")
     private String title;
 
-    @Column(name="ISBN")
+    @Column(name="isbn")
     private String ISBN;
 
     @Column(name="publication_date")
     private java.time.LocalDate publicationDate;
 
-    @Column(name="author_id")
-    private int authorId;
-
     @Column(name="genre")
     private String genre;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "author_id")
+    private Author author;
 }

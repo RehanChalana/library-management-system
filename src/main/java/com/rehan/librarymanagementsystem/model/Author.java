@@ -2,8 +2,12 @@ package com.rehan.librarymanagementsystem.model;
 
 
 import jakarta.persistence.*;
+import lombok.Data;
+
+import java.util.List;
 
 @Entity
+@Data
 @Table(name="authors")
 public class Author {
 
@@ -14,4 +18,5 @@ public class Author {
 
     @Column(name="name")
     private String title;
+
 }
