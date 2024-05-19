@@ -13,7 +13,7 @@ public class BookService {
         this.bookRepository=bookRepository;
     }
 
-    public Book add(Book book) {
+    public Book save(Book book) {
         return bookRepository.save(book);
     }
 
@@ -21,13 +21,10 @@ public class BookService {
         return bookRepository.findById(id).get();
     }
 
-    public void delete(int id){
+    public void deleteById(int id){
         bookRepository.deleteById(id);
     }
 
-    public void update(Book book){
-        bookRepository.save(book);
-    }
 
     public Iterable<Book> findAll() {
         return bookRepository.findAll();

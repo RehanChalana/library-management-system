@@ -17,6 +17,6 @@ public class Author {
     private int author_id;
 
     @Column(name="name")
-    private String title;
+    private String name;
 
 }
