@@ -1,6 +1,7 @@
 package com.rehan.librarymanagementsystem.model;
 
 
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -14,9 +15,10 @@ public class Author {
     @Id
     @Column(name="author_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int author_id;
+    private int authorId;
 
     @Column(name="name")
     private String name;
+
 
 }

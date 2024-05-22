@@ -16,4 +16,16 @@ public class AuthorService {
     public Iterable<Author> findAll() {
         return authorRepository.findAll();
     }
+
+    public Author findById(int id) {
+        return authorRepository.findById(id).get();
+    }
+
+    public void deleteById(int id) {
+        authorRepository.deleteById(id);
+    }
+
+    public Author save(Author author) {
+        return authorRepository.save(author);
+    }
 }
