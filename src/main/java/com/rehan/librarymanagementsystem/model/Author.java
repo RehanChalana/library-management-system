@@ -3,6 +3,8 @@ package com.rehan.librarymanagementsystem.model;
 
 import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.util.List;
@@ -17,6 +19,8 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int authorId;
 
+    @NotNull
+    @Size(min = 2 , max = 50)
     @Column(name="name")
     private String name;
 
