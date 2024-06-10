@@ -18,7 +18,7 @@ public class BookCopyController {
         return bookCopyService.findAll();
     }
 
-    @GetMapping("/bookcopies/{copy_id}")
+    @GetMapping("/bookcopies/{copyId}")
     public BookCopy findById(@PathVariable int copyId) {
         return bookCopyService.findById(copyId);
     }

@@ -15,14 +15,24 @@ CREATE TABLE IF NOT EXISTS books (
     FOREIGN KEY (author_id) REFERENCES authors(author_id)
 );
 
+CREATE TABLE IF NOT EXISTS users(
+    user_id SERIAL PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password CHAR(68) NOT NULL,
+    enabled BOOLEAN NOT NULL
+);
 
 CREATE TABLE IF NOT EXISTS book_copies(
     copy_id SERIAL PRIMARY KEY,
-    book_id SERIAL NOT NULL,
+    book_id INTEGER NOT NULL,
+    user_id INTEGER ,
     is_borrowed BOOLEAN NOT NULL,
     due_date DATE,
-    FOREIGN KEY (book_id) REFERENCES books(book_id)
+    FOREIGN KEY (book_id) REFERENCES books(book_id),
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
+
+
 
 
 
