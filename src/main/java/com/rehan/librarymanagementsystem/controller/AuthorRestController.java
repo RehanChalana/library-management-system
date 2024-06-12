@@ -1,7 +1,12 @@
 package com.rehan.librarymanagementsystem.controller;
 
+import com.rehan.librarymanagementsystem.exceptions.AuthorNotFoundException;
 import com.rehan.librarymanagementsystem.model.Author;
 import com.rehan.librarymanagementsystem.service.AuthorService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -26,17 +31,18 @@ public class AuthorRestController {
 
     @DeleteMapping("/authors/{authorId}")
     public void deleteById(@PathVariable int authorId) {
-         authorService.deleteById(authorId);
+        authorService.deleteById(authorId);
     }
 
     @PostMapping("/authors")
-    public Author saveNewAuthor(@RequestBody Author author) {
-        return authorService.save(author);
+    public ResponseEntity<Author> saveNewAuthor(@RequestBody @Valid Author author) {
+        Author createdAuthor =  authorService.addNewAuthor(author);
+        return new ResponseEntity<>(createdAuthor, HttpStatus.CREATED);
     }
 
     @PutMapping("/authors")
-    public Author updateAuthor(@RequestBody Author author) {
-        return authorService.save(author);
+    public Author updateAuthor(@RequestBody @Valid Author author) {
+        return authorService.updateAuthor(author);
     }
 
 }

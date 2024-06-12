@@ -20,9 +20,8 @@ public class Author {
     private int authorId;
 
     @NotNull
-    @Size(min = 2 , max = 50)
+    @Size(min = 2 , max = 50,message = "invalid name length for author")
     @Column(name="name")
     private String name;
-
 
 }

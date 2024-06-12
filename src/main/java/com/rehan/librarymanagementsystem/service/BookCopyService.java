@@ -27,7 +27,7 @@ public class BookCopyService {
     }
 
     public BookCopy save(BookCopy bookCopy) {
-        bookCopy.setBook(bookService.findById(bookCopy.getBook().getBookId()));
+//        bookCopy.setBook(bookService.findById(bookCopy.getBook().getBookId()));
         return bookCopyRepository.save(bookCopy);
     }
 
