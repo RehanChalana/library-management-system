@@ -1,6 +1,7 @@
 package com.rehan.librarymanagementsystem.service;
 
 import com.rehan.librarymanagementsystem.exceptions.AuthorNotFoundException;
+import com.rehan.librarymanagementsystem.exceptions.BookNotFoundException;
 import com.rehan.librarymanagementsystem.model.Author;
 import com.rehan.librarymanagementsystem.model.Book;
 import com.rehan.librarymanagementsystem.repositories.AuthorRepository;
@@ -8,6 +9,7 @@ import com.rehan.librarymanagementsystem.repositories.BookRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -24,6 +26,7 @@ public class BookService {
         this.authorRepository=authorRepository;
     }
 
+    @Transactional
     public Book addNewBook(Book book) {
         book.setBookId(0);
         int authorId = book.getAuthor().getAuthorId();
@@ -31,11 +34,23 @@ public class BookService {
         return bookRepository.save(book);
     }
 
-    public Optional<Book> findById(int id) {
-        return bookRepository.findById(id);
+    public Book updateBook(Book book) {
+        int bookId = book.getBookId();
+        int authorId = book.getAuthor().getAuthorId();
+        if(bookRepository.findById(bookId).isEmpty()) throw new BookNotFoundException("Book with bookId : "+bookId+" does not exists");
+        if(authorRepository.findById(authorId).isEmpty()) throw new AuthorNotFoundException("Author with authorId : "+authorId+"does not exists");
+        return bookRepository.save(book);
+    }
+
+    public Book findById(int id) {
+        Optional<Book> book = bookRepository.findById(id);
+        if(book.isEmpty()) throw new BookNotFoundException("Book with bookId : "+id+" does not exists");
+        return book.get();
     }
 
     public void deleteById(int id){
+        Optional<Book> book = bookRepository.findById(id);
+        if(book.isEmpty()) throw new BookNotFoundException("Book with bookId : "+id+" does not exists");
         bookRepository.deleteById(id);
     }
 

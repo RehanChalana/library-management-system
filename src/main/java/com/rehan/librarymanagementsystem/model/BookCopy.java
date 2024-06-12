@@ -29,8 +29,8 @@ public class BookCopy {
     @JoinColumn(name="book_id")
     private Book book;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="user_id")
-    private User user;
+
+    @Column(name="user_id")
+    private Integer userId;
 
 }
