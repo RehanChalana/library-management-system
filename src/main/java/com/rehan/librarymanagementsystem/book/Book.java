@@ -1,6 +1,7 @@
-package com.rehan.librarymanagementsystem.model;
+package com.rehan.librarymanagementsystem.book;
 
 
+import com.rehan.librarymanagementsystem.author.Author;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;

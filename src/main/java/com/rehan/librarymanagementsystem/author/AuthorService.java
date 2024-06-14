@@ -1,8 +1,6 @@
-package com.rehan.librarymanagementsystem.service;
+package com.rehan.librarymanagementsystem.author;
 
-import com.rehan.librarymanagementsystem.exceptions.AuthorNotFoundException;
-import com.rehan.librarymanagementsystem.model.Author;
-import com.rehan.librarymanagementsystem.repositories.AuthorRepository;
+import com.rehan.librarymanagementsystem.exceptions.custom.AuthorNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

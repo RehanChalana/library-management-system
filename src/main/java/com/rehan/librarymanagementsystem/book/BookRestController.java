@@ -1,7 +1,5 @@
-package com.rehan.librarymanagementsystem.controller;
+package com.rehan.librarymanagementsystem.book;
 
-import com.rehan.librarymanagementsystem.model.Book;
-import com.rehan.librarymanagementsystem.service.BookService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

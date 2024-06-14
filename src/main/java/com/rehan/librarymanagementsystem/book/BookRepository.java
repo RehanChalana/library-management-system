@@ -1,6 +1,5 @@
-package com.rehan.librarymanagementsystem.repositories;
+package com.rehan.librarymanagementsystem.book;
 
-import com.rehan.librarymanagementsystem.model.Book;
 import org.springframework.data.repository.CrudRepository;
 
 public interface BookRepository extends CrudRepository<Book,Integer> {

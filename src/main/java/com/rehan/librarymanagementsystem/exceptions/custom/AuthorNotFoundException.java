@@ -1,4 +1,4 @@
-package com.rehan.librarymanagementsystem.exceptions;
+package com.rehan.librarymanagementsystem.exceptions.custom;
 
 public class AuthorNotFoundException extends RuntimeException{
     public AuthorNotFoundException(String message) {

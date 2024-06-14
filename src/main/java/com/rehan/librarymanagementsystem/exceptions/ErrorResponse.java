@@ -1,9 +1,7 @@
-package com.rehan.librarymanagementsystem.model;
+package com.rehan.librarymanagementsystem.exceptions;
 
 import lombok.Data;
 import org.springframework.http.HttpStatus;
-
-import java.util.List;
 
 @Data
 public class ErrorResponse {

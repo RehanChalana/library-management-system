@@ -1,7 +1,7 @@
-package com.rehan.librarymanagementsystem.model;
+package com.rehan.librarymanagementsystem.bookcopy;
 
+import com.rehan.librarymanagementsystem.book.Book;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

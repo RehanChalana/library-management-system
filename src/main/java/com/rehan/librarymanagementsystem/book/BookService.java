@@ -1,11 +1,8 @@
-package com.rehan.librarymanagementsystem.service;
+package com.rehan.librarymanagementsystem.book;
 
-import com.rehan.librarymanagementsystem.exceptions.AuthorNotFoundException;
-import com.rehan.librarymanagementsystem.exceptions.BookNotFoundException;
-import com.rehan.librarymanagementsystem.model.Author;
-import com.rehan.librarymanagementsystem.model.Book;
-import com.rehan.librarymanagementsystem.repositories.AuthorRepository;
-import com.rehan.librarymanagementsystem.repositories.BookRepository;
+import com.rehan.librarymanagementsystem.author.AuthorRepository;
+import com.rehan.librarymanagementsystem.exceptions.custom.AuthorNotFoundException;
+import com.rehan.librarymanagementsystem.exceptions.custom.BookNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

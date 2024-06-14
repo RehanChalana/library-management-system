@@ -1,4 +1,4 @@
-package com.rehan.librarymanagementsystem.exceptions;
+package com.rehan.librarymanagementsystem.exceptions.custom;
 
 public class BookNotFoundException extends RuntimeException{
     public BookNotFoundException(String message) {

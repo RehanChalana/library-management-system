@@ -1,8 +1,5 @@
-package com.rehan.librarymanagementsystem.controller;
+package com.rehan.librarymanagementsystem.bookcopy;
 
-import com.rehan.librarymanagementsystem.model.BookCopy;
-import com.rehan.librarymanagementsystem.service.BookCopyService;
-import com.rehan.librarymanagementsystem.service.BookService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

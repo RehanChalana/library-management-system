@@ -1,6 +1,5 @@
-package com.rehan.librarymanagementsystem.repositories;
+package com.rehan.librarymanagementsystem.author;
 
-import com.rehan.librarymanagementsystem.model.Author;
 import org.springframework.data.repository.CrudRepository;
 
 public interface AuthorRepository extends CrudRepository<Author,Integer> {

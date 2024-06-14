@@ -1,10 +1,8 @@
-package com.rehan.librarymanagementsystem.service;
+package com.rehan.librarymanagementsystem.bookcopy;
 
-import com.rehan.librarymanagementsystem.exceptions.BookCopyNotFoundException;
-import com.rehan.librarymanagementsystem.exceptions.BookNotFoundException;
-import com.rehan.librarymanagementsystem.model.BookCopy;
-import com.rehan.librarymanagementsystem.repositories.BookCopyRepository;
-import com.rehan.librarymanagementsystem.repositories.BookRepository;
+import com.rehan.librarymanagementsystem.book.BookRepository;
+import com.rehan.librarymanagementsystem.exceptions.custom.BookCopyNotFoundException;
+import com.rehan.librarymanagementsystem.exceptions.custom.BookNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
