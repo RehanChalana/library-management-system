@@ -3,8 +3,6 @@ package com.rehan.librarymanagementsystem.author;
 import com.rehan.librarymanagementsystem.exceptions.custom.AuthorNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class AuthorService {
     private final AuthorRepository authorRepository;
@@ -19,14 +17,12 @@ public class AuthorService {
     }
 
     public Author findById(int id) {
-        Optional<Author> author = authorRepository.findById(id);
-        if(author.isEmpty()) throw new AuthorNotFoundException("Author with authorId : " + id  +" does not exists");
-        return author.get();
+        Author author = authorRepository.findById(id).orElseThrow(() -> new AuthorNotFoundException("Author with authorId : " + id  +" does not exists"));
+        return author;
     }
 
     public void deleteById(int id) {
-        Optional<Author> author = authorRepository.findById(id);
-        if(author.isEmpty()) throw new AuthorNotFoundException("Author with authorId : " + id  +" does not exists");
+        Author author = authorRepository.findById(id).orElseThrow(() -> new AuthorNotFoundException("Author with authorId : " + id  +" does not exists"));
         authorRepository.deleteById(id);
     }
 
@@ -37,7 +33,7 @@ public class AuthorService {
 
     public Author updateAuthor(Author author) {
         int authorId = author.getAuthorId();
-        if(authorRepository.findById(authorId).isEmpty()) throw new AuthorNotFoundException("Author with authorId : "+authorId+" does not exists");
+        authorRepository.findById(authorId).orElseThrow(()-> new AuthorNotFoundException("Author with authorId : " + authorId  +" does not exists"));
         return authorRepository.save(author);
     }
 }
