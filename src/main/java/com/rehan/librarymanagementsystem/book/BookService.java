@@ -32,36 +32,33 @@ public class BookService {
 
     public BookResponseDTO addNewBook(BookRequestDTO request) {
         int authorId = request.authorId();
-        if(authorRepository.findById(authorId).isEmpty()) throw new AuthorNotFoundException("Author with authorId : "+authorId+" does not exists");
+        authorRepository.findById(authorId).orElseThrow( () ->  new AuthorNotFoundException("Author with authorId : "+authorId+" does not exists"));
         Book bookEntity = bookMapper.requestDTOtoBook(request);
         log.info("book entity : "+bookEntity.toString());
 //        setting bookId to 0 because we are creating a new entry
         bookEntity.setBookId(0);
         Book savedEntity =  bookRepository.save(bookEntity);
-        BookResponseDTO response = bookMapper.bookToResponseDTO(savedEntity);
-        return response;
+        return bookMapper.bookToResponseDTO(savedEntity);
     }
 
     public BookResponseDTO updateBook(BookRequestDTO request,int bookId) {
         int authorId = request.authorId();
-        if(bookRepository.findById(bookId).isEmpty()) throw new BookNotFoundException("Book with bookId : "+bookId+" does not exists");
-        if(authorRepository.findById(authorId).isEmpty()) throw new AuthorNotFoundException("Author with authorId : "+authorId+"does not exists");
+        bookRepository.findById(bookId).orElseThrow(() -> new BookNotFoundException("Book with bookId : "+bookId+" does not exists"));
+        authorRepository.findById(authorId).orElseThrow( () ->  new AuthorNotFoundException("Author with authorId : "+authorId+" does not exists"));
         Book bookEntity = bookMapper.requestDTOtoBook(request);
         bookEntity.setBookId(bookId);
         Book savedEntity = bookRepository.save(bookEntity);
-        BookResponseDTO response = bookMapper.bookToResponseDTO(savedEntity);
-        return response;
+        return  bookMapper.bookToResponseDTO(savedEntity);
+
     }
 
     public BookResponseDTO findById(int id) {
-        Optional<Book> book = bookRepository.findById(id);
-        if(book.isEmpty()) throw new BookNotFoundException("Book with bookId : "+id+" does not exists");
-        return bookMapper.bookToResponseDTO(book.get());
+        Book book = bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException("Book with bookId : "+id+" does not exists"));
+        return bookMapper.bookToResponseDTO(book);
     }
 
     public void deleteById(int id){
-        Optional<Book> book = bookRepository.findById(id);
-        if(book.isEmpty()) throw new BookNotFoundException("Book with bookId : "+id+" does not exists");
+        bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException("Book with bookId : "+id+" does not exists"));
         bookRepository.deleteById(id);
     }
 
