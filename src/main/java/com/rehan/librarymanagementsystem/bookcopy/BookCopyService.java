@@ -1,51 +1,59 @@
 package com.rehan.librarymanagementsystem.bookcopy;
 
 import com.rehan.librarymanagementsystem.book.BookRepository;
+import com.rehan.librarymanagementsystem.bookcopy.dto.CopyMapper;
+import com.rehan.librarymanagementsystem.bookcopy.dto.CopyRequestDTO;
+import com.rehan.librarymanagementsystem.bookcopy.dto.CopyResponseDTO;
 import com.rehan.librarymanagementsystem.exceptions.custom.BookCopyNotFoundException;
 import com.rehan.librarymanagementsystem.exceptions.custom.BookNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BookCopyService {
 
+    private final CopyMapper copyMapper;
+
     private final BookCopyRepository bookCopyRepository;
     private final BookRepository bookRepository;
 
-    public BookCopyService(BookCopyRepository bookCopyRepository,BookRepository bookRepository) {
+    public BookCopyService(BookCopyRepository bookCopyRepository,BookRepository bookRepository,CopyMapper copyMapper) {
         this.bookCopyRepository=bookCopyRepository;
         this.bookRepository=bookRepository;
+        this.copyMapper=copyMapper;
     }
 
-    public Iterable<BookCopy> findAll(){
-        return bookCopyRepository.findAll();
+    public List<CopyResponseDTO> findAll(){
+        List<BookCopy> copies = bookCopyRepository.findAll();
+        return copies.stream().map(copyMapper::CopyToResponseDTO).collect(Collectors.toList());
     }
 
-    public BookCopy findById(int id){
-        Optional<BookCopy> bookCopy = bookCopyRepository.findById(id);
-        if(bookCopy.isEmpty()) throw new BookCopyNotFoundException("book copy with copyId : "+id+" does not exists");
-        return bookCopy.get();
+    public CopyResponseDTO findById(int id){
+        BookCopy bookCopy = bookCopyRepository.findById(id).orElseThrow( () -> new BookCopyNotFoundException("book copy with copyId : "+id+" does not exists"));
+        return copyMapper.CopyToResponseDTO(bookCopy);
     }
 
-    public BookCopy addNewCopy(BookCopy bookCopy) {
-        bookCopy.setCopyId(0);
-        int bookId = bookCopy.getBook().getBookId();
-        if(bookRepository.findById(bookId).isEmpty()) throw new BookNotFoundException("Book with bookId : "+bookId+" does not exists");
-        return bookCopyRepository.save(bookCopy);
+    public CopyResponseDTO addNewCopy(CopyRequestDTO bookCopy) {
+        int bookId = bookCopy.bookId();
+        bookRepository.findById(bookId).orElseThrow(() -> new BookNotFoundException("Book with bookId : "+bookId+" does not exists"));
+        BookCopy copyEntity = copyMapper.RequestDTOtoCopy(bookCopy);
+        BookCopy savedEntity = bookCopyRepository.save(copyEntity);
+        return copyMapper.CopyToResponseDTO(savedEntity);
     }
 
-    public BookCopy updateCopy(BookCopy bookCopy) {
-        int bookId = bookCopy.getBook().getBookId();
-        int copyId = bookCopy.getCopyId();
-        if(bookRepository.findById(bookId).isEmpty()) throw new BookNotFoundException("Book with bookId : "+bookId+" does not exists");
-        if(bookCopyRepository.findById(copyId).isEmpty()) throw new BookCopyNotFoundException("book copy with copyId : "+copyId+" does not exists");
-        return bookCopyRepository.save(bookCopy);
+    public CopyResponseDTO updateCopy(CopyRequestDTO bookCopy,int copyId) {
+        int bookId = bookCopy.bookId();
+        bookRepository.findById(bookId).orElseThrow(() -> new BookNotFoundException("Book with bookId : "+bookId+" does not exists"));
+        bookCopyRepository.findById(copyId).orElseThrow( () -> new BookCopyNotFoundException("book copy with copyId : "+copyId+" does not exists"));
+        BookCopy copyEntity = copyMapper.RequestDTOtoCopy(bookCopy);
+        BookCopy savedEntity =  bookCopyRepository.save(copyEntity);
+        return copyMapper.CopyToResponseDTO(savedEntity);
     }
 
     public void deleteCopy(int copyId) {
-        Optional<BookCopy> bookCopy = bookCopyRepository.findById(copyId);
-        if(bookCopy.isEmpty()) throw new BookCopyNotFoundException("book copy with copyId : "+copyId+" does not exists");
+        bookCopyRepository.findById(copyId).orElseThrow(() -> new BookCopyNotFoundException("book copy with copyId : "+copyId+" does not exists"));
         bookCopyRepository.deleteById(copyId);
     }
 

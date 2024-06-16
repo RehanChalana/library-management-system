@@ -29,7 +29,6 @@ public class BookCopy {
     @JoinColumn(name="book_id")
     private Book book;
 
-
     @Column(name="user_id")
     private Integer userId;
 
