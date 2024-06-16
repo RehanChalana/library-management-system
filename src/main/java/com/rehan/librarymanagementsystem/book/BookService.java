@@ -1,37 +1,39 @@
 package com.rehan.librarymanagementsystem.book;
 
-import com.rehan.librarymanagementsystem.author.AuthorRepository;
+import com.rehan.librarymanagementsystem.author.AuthorService;
 import com.rehan.librarymanagementsystem.book.dto.BookMapper;
 import com.rehan.librarymanagementsystem.book.dto.BookRequestDTO;
 import com.rehan.librarymanagementsystem.book.dto.BookResponseDTO;
-import com.rehan.librarymanagementsystem.exceptions.custom.AuthorNotFoundException;
 import com.rehan.librarymanagementsystem.exceptions.custom.BookNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @Slf4j
+@Transactional
 public class BookService {
 
     private final BookRepository bookRepository;
-    private final AuthorRepository authorRepository;
+    private final AuthorService authorService;
     private final BookMapper bookMapper;
 
     @Autowired
-    public BookService(BookRepository bookRepository,AuthorRepository authorRepository,BookMapper bookMapper) {
+    public BookService(BookRepository bookRepository,AuthorService authorService,BookMapper bookMapper) {
         this.bookRepository=bookRepository;
-        this.authorRepository=authorRepository;
+        this.authorService=authorService;
         this.bookMapper=bookMapper;
     }
 
 
     public BookResponseDTO addNewBook(BookRequestDTO request) {
         int authorId = request.authorId();
-        authorRepository.findById(authorId).orElseThrow( () ->  new AuthorNotFoundException("Author with authorId : "+authorId+" does not exists"));
+//      for error handling if author does not exist
+        authorService.findById(authorId);
         Book bookEntity = bookMapper.requestDTOtoBook(request);
         log.info("book entity : "+bookEntity.toString());
 //        setting bookId to 0 because we are creating a new entry
@@ -43,7 +45,8 @@ public class BookService {
     public BookResponseDTO updateBook(BookRequestDTO request,int bookId) {
         int authorId = request.authorId();
         bookRepository.findById(bookId).orElseThrow(() -> new BookNotFoundException("Book with bookId : "+bookId+" does not exists"));
-        authorRepository.findById(authorId).orElseThrow( () ->  new AuthorNotFoundException("Author with authorId : "+authorId+" does not exists"));
+//      for error handling if author does not exist
+        authorService.findById(authorId);
         Book bookEntity = bookMapper.requestDTOtoBook(request);
         bookEntity.setBookId(bookId);
         Book savedEntity = bookRepository.save(bookEntity);
