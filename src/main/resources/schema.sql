@@ -32,6 +32,19 @@ CREATE TABLE IF NOT EXISTS book_copies(
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
+CREATE TABLE IF NOT EXISTS authorities (
+    authorities_id SERIAL PRIMARY KEY ,
+    role VARCHAR(50) NOT NULL UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS user_authorities (
+    authorities_id INT NOT NULL ,
+    user_id INT NOT NULL ,
+    FOREIGN KEY (authorities_id) REFERENCES users(user_id),
+    FOREIGN KEY (authorities_id) REFERENCES authorities(authorities_id, role),
+    PRIMARY KEY (user_id, authority_id)
+);
+
 
 
 

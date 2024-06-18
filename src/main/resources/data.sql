@@ -28,3 +28,16 @@ INSERT INTO book_copies (book_id, user_id, is_borrowed, due_date) VALUES
 (3, NULL, FALSE, NULL),
 (4, 1, TRUE, '2024-06-20'),
 (5, NULL, FALSE, NULL);
+
+-- Insert sample users
+INSERT INTO users (username, password, enabled) VALUES ('user1', '{bcrypt}$2a$12$WnH/PHyYhtEGxQTvayAQ5O./tqK9JRsCGQ2WPxn/ZEauZ.8gUqX6W', TRUE);
+INSERT INTO users (username, password, enabled) VALUES ('user2', '{bcrypt}$2a$12$lkIVoeA2SGZTyk9LlCY.m.H5tXNfMhOOgzll2Ha.I0YtMQhM6w6xS', TRUE);
+
+-- Insert sample authorities
+INSERT INTO authorities (role) VALUES ('ROLE_USER');
+INSERT INTO authorities (role) VALUES ('ROLE_ADMIN');
+
+-- Insert sample user_authorities relationships
+INSERT INTO user_authorities (user_id, authority_id) VALUES (1, 1);  -- user1 has ROLE_USER
+INSERT INTO user_authorities (user_id, authority_id) VALUES (1, 2);  -- user1 has ROLE_ADMIN
+INSERT INTO user_authorities (user_id, authority_id) VALUES (2, 1);
