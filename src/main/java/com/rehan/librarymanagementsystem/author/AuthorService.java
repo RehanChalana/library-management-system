@@ -31,7 +31,7 @@ public class AuthorService {
     }
 
     public void deleteById(int id) {
-        Author author = authorRepository.findById(id).orElseThrow(() -> new AuthorNotFoundException("Author with authorId : " + id  +" does not exists"));
+        authorRepository.findById(id).orElseThrow(() -> new AuthorNotFoundException("Author with authorId : " + id  +" does not exists"));
         authorRepository.deleteById(id);
     }
 

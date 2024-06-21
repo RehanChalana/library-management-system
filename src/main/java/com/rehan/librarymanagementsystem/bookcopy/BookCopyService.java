@@ -1,6 +1,7 @@
 package com.rehan.librarymanagementsystem.bookcopy;
 
 import com.rehan.librarymanagementsystem.book.BookRepository;
+import com.rehan.librarymanagementsystem.book.BookService;
 import com.rehan.librarymanagementsystem.bookcopy.dto.CopyMapper;
 import com.rehan.librarymanagementsystem.bookcopy.dto.CopyRequestDTO;
 import com.rehan.librarymanagementsystem.bookcopy.dto.CopyResponseDTO;
@@ -17,11 +18,11 @@ public class BookCopyService {
     private final CopyMapper copyMapper;
 
     private final BookCopyRepository bookCopyRepository;
-    private final BookRepository bookRepository;
+    private final BookService bookService;
 
-    public BookCopyService(BookCopyRepository bookCopyRepository,BookRepository bookRepository,CopyMapper copyMapper) {
+    public BookCopyService(BookCopyRepository bookCopyRepository,BookService bookService,CopyMapper copyMapper) {
         this.bookCopyRepository=bookCopyRepository;
-        this.bookRepository=bookRepository;
+        this.bookService=bookService;
         this.copyMapper=copyMapper;
     }
 
@@ -37,7 +38,8 @@ public class BookCopyService {
 
     public CopyResponseDTO addNewCopy(CopyRequestDTO bookCopy) {
         int bookId = bookCopy.bookId();
-        bookRepository.findById(bookId).orElseThrow(() -> new BookNotFoundException("Book with bookId : "+bookId+" does not exists"));
+//        for error handling of books
+        bookService.findById(bookId);
         BookCopy copyEntity = copyMapper.RequestDTOtoCopy(bookCopy);
         BookCopy savedEntity = bookCopyRepository.save(copyEntity);
         return copyMapper.CopyToResponseDTO(savedEntity);
@@ -45,7 +47,8 @@ public class BookCopyService {
 
     public CopyResponseDTO updateCopy(CopyRequestDTO bookCopy,int copyId) {
         int bookId = bookCopy.bookId();
-        bookRepository.findById(bookId).orElseThrow(() -> new BookNotFoundException("Book with bookId : "+bookId+" does not exists"));
+//        for error handling of books
+        bookService.findById(bookId);
         bookCopyRepository.findById(copyId).orElseThrow( () -> new BookCopyNotFoundException("book copy with copyId : "+copyId+" does not exists"));
         BookCopy copyEntity = copyMapper.RequestDTOtoCopy(bookCopy);
         BookCopy savedEntity =  bookCopyRepository.save(copyEntity);
