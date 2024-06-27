@@ -77,7 +77,6 @@ public class AuthorControllerTest {
 
     @Test
     public void deleteByIdTest() throws Exception {
-        doNothing().when(authorService).deleteById(1);
         mockMvc.perform(delete("/api/authors/1"))
                 .andExpect(status().isOk());
         verify(authorService,times(1)).deleteById(1);
