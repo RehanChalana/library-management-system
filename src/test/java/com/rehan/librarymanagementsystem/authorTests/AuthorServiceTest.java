@@ -1,4 +1,4 @@
-package com.rehan.librarymanagementsystem;
+package com.rehan.librarymanagementsystem.authorTests;
 
 import com.rehan.librarymanagementsystem.author.Author;
 import com.rehan.librarymanagementsystem.author.AuthorRepository;
@@ -50,6 +50,8 @@ public class AuthorServiceTest {
         when(authorMapper.authortoAuthorResponseDTO(author)).thenReturn(new AuthorResponseDTO(1,"name"));
         AuthorResponseDTO result = authorService.findById(1);
         assertNotNull(result);
+        assertEquals(1,result.authorId());
+        assertEquals("name",result.name());
         verify(authorRepository,times(1)).findById(1);
     }
 

@@ -37,8 +37,6 @@ public class AuthorService {
 
     public AuthorResponseDTO addNewAuthor(AuthorRequestDTO request) {
         Author authorEntity = authorMapper.authorRequestDTOToAuthor(request);
-//        setting authorId to 0 because new entry is being created
-        authorEntity.setAuthorId(0);
         Author savedEntity =  authorRepository.save(authorEntity);
         return authorMapper.authortoAuthorResponseDTO(savedEntity);
     }
