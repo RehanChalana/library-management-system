@@ -22,7 +22,7 @@ public class BookRestController {
     }
 
     @PostMapping("/books")
-    public ResponseEntity<BookResponseDTO> save(@RequestBody @Valid BookRequestDTO book) {
+    public ResponseEntity<BookResponseDTO> addNewBook(@RequestBody @Valid BookRequestDTO book) {
         BookResponseDTO createdBook = bookService.addNewBook(book);
         return new ResponseEntity<>(createdBook, HttpStatus.CREATED);
     }
@@ -33,7 +33,7 @@ public class BookRestController {
     }
 
     @GetMapping("/books/{bookId}")
-    public BookResponseDTO getBook(@PathVariable int bookId) {
+    public BookResponseDTO getBookById(@PathVariable int bookId) {
         return bookService.findById(bookId);
     }
 
