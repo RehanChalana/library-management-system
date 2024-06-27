@@ -36,8 +36,6 @@ public class BookService {
         authorService.findById(authorId);
         Book bookEntity = bookMapper.requestDTOtoBook(request);
         log.info("book entity : "+bookEntity.toString());
-//        setting bookId to 0 because we are creating a new entry
-        bookEntity.setBookId(0);
         Book savedEntity =  bookRepository.save(bookEntity);
         return bookMapper.bookToResponseDTO(savedEntity);
     }
