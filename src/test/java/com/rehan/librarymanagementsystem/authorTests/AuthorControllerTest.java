@@ -1,4 +1,4 @@
-package com.rehan.librarymanagementsystem;
+package com.rehan.librarymanagementsystem.authorTests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rehan.librarymanagementsystem.author.AuthorRestController;
@@ -96,6 +96,7 @@ public class AuthorControllerTest {
                 .andExpect(jsonPath("$.authorId").value(1))
                 .andExpect(jsonPath("$.name").value("name"));
 
+        verify(authorService,times(1)).updateAuthor(authorRequestDTO,1);
     }
 
 
