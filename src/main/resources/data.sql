@@ -1,3 +1,8 @@
+
+
+INSERT INTO users (username, password, enabled) VALUES ('user1', '{bcrypt}$2a$10$aUSABGv6GxbxaYXK50orHuUNnzvEDPx5XVV61YwG6PN4sdrc5u3bm', true);
+INSERT INTO authorities (user_id, authority) VALUES ((SELECT user_id FROM users WHERE username = 'user1'), 'ROLE_ADMIN');
+
 -- Inserting authors
 INSERT INTO authors (name) VALUES
 ('George Orwell'),
@@ -14,30 +19,13 @@ INSERT INTO books (ISBN, title, publication_date, author_id, genre) VALUES
 ('978-1503290563', 'Pride and Prejudice', '1813-01-28', 4, 'Romance'),
 ('978-0486280615', 'The Adventures of Huckleberry Finn', '1884-12-10', 5, 'Adventure');
 
--- Inserting users
-INSERT INTO users (username, password, enabled) VALUES
-('alice', '2b6e6e3dc7da2fbc08d1c5cf0f8a11e8', TRUE),
-('bob', '098f6bcd4621d373cade4e832627b4f6', TRUE),
-('charlie', 'ab56b4d92b40713acc5af89985d4b786', FALSE),
-('dave', '5f4dcc3b5aa765d61d8327deb882cf99', TRUE);
 
 -- Inserting book copies
 INSERT INTO book_copies (book_id, user_id, is_borrowed, due_date) VALUES
 (1, 1, TRUE, '2024-07-01'),
-(2, 2, TRUE, '2024-07-10'),
+(2, 1, TRUE, '2024-07-10'),
 (3, NULL, FALSE, NULL),
 (4, 1, TRUE, '2024-06-20'),
 (5, NULL, FALSE, NULL);
 
--- Insert sample users
-INSERT INTO users (username, password, enabled) VALUES ('user1', '{bcrypt}$2a$12$WnH/PHyYhtEGxQTvayAQ5O./tqK9JRsCGQ2WPxn/ZEauZ.8gUqX6W', TRUE);
-INSERT INTO users (username, password, enabled) VALUES ('user2', '{bcrypt}$2a$12$lkIVoeA2SGZTyk9LlCY.m.H5tXNfMhOOgzll2Ha.I0YtMQhM6w6xS', TRUE);
 
--- Insert sample authorities
-INSERT INTO authorities (role) VALUES ('ROLE_USER');
-INSERT INTO authorities (role) VALUES ('ROLE_ADMIN');
-
--- Insert sample user_authorities relationships
-INSERT INTO user_authorities (user_id, authority_id) VALUES (1, 1);  -- user1 has ROLE_USER
-INSERT INTO user_authorities (user_id, authority_id) VALUES (1, 2);  -- user1 has ROLE_ADMIN
-INSERT INTO user_authorities (user_id, authority_id) VALUES (2, 1);

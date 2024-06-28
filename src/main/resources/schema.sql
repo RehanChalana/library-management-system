@@ -15,35 +15,34 @@ CREATE TABLE IF NOT EXISTS books (
     FOREIGN KEY (author_id) REFERENCES authors(author_id)
 );
 
-CREATE TABLE IF NOT EXISTS users(
+-- Users table to store user details
+CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
-    username VARCHAR(50) NOT NULL UNIQUE,
-    password CHAR(68) NOT NULL,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(100) NOT NULL,
     enabled BOOLEAN NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS book_copies(
+
+CREATE TABLE IF NOT EXISTS book_copies  (
     copy_id SERIAL PRIMARY KEY,
-    book_id INTEGER NOT NULL,
-    user_id INTEGER ,
+    book_id INT NOT NULL ,
+    user_id INT,
     is_borrowed BOOLEAN NOT NULL,
     due_date DATE,
     FOREIGN KEY (book_id) REFERENCES books(book_id),
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
-CREATE TABLE IF NOT EXISTS authorities (
-    authorities_id SERIAL PRIMARY KEY ,
-    role VARCHAR(50) NOT NULL UNIQUE
+-- Authorities table to store roles/authorities for each user
+CREATE TABLE authorities (
+    user_id INTEGER NOT NULL,
+    authority VARCHAR(50) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
 
-CREATE TABLE IF NOT EXISTS user_authorities (
-    authorities_id INT NOT NULL ,
-    user_id INT NOT NULL ,
-    FOREIGN KEY (authorities_id) REFERENCES users(user_id),
-    FOREIGN KEY (authorities_id) REFERENCES authorities(authorities_id, role),
-    PRIMARY KEY (user_id, authority_id)
-);
+-- Index for performance improvement on authorities table
+CREATE UNIQUE INDEX ix_auth_user_id ON authorities (user_id, authority);
 
 
 
