@@ -41,6 +41,7 @@ public class BookRestController {
     public BookResponseDTO updateBook(@RequestBody @Valid BookRequestDTO book,@PathVariable int bookId) {
         return bookService.updateBook(book,bookId);
     }
+
     @DeleteMapping("/books/{bookId}")
     public void deleteBook(@PathVariable int bookId) {
         bookService.deleteById(bookId);
