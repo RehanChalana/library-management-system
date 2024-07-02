@@ -1,12 +1,10 @@
 package com.rehan.librarymanagementsystem.bookcopy;
 
-import com.rehan.librarymanagementsystem.book.BookRepository;
 import com.rehan.librarymanagementsystem.book.BookService;
 import com.rehan.librarymanagementsystem.bookcopy.dto.CopyMapper;
 import com.rehan.librarymanagementsystem.bookcopy.dto.CopyRequestDTO;
 import com.rehan.librarymanagementsystem.bookcopy.dto.CopyResponseDTO;
 import com.rehan.librarymanagementsystem.exceptions.custom.BookCopyNotFoundException;
-import com.rehan.librarymanagementsystem.exceptions.custom.BookNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -55,7 +53,7 @@ public class BookCopyService {
         return copyMapper.CopyToResponseDTO(savedEntity);
     }
 
-    public void deleteCopy(int copyId) {
+    public void deleteById(int copyId) {
         bookCopyRepository.findById(copyId).orElseThrow(() -> new BookCopyNotFoundException("book copy with copyId : "+copyId+" does not exists"));
         bookCopyRepository.deleteById(copyId);
     }
