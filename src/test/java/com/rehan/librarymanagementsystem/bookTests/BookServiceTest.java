@@ -61,7 +61,6 @@ public class BookServiceTest {
         when(bookRepository.findById(1)).thenReturn(Optional.empty());
         assertThrows(BookNotFoundException.class,() -> bookService.findById(1));
         verify(bookRepository,times(1)).findById(1);
-        verify(bookRepository,never()).deleteById(1);
     }
 
     @Test

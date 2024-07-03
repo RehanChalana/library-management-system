@@ -41,7 +41,7 @@ public class BookCopyController {
 
     @DeleteMapping("/bookcopies/{copyId}")
     public void delete(@PathVariable int copyId) {
-         bookCopyService.deleteCopy(copyId);
+         bookCopyService.deleteById(copyId);
     }
 
 
