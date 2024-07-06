@@ -1,14 +1,24 @@
 # library-management-system
 This project provides a simple REST API for a library management system, developed using Spring Boot. The API allows for efficient management of books, authors, and copies, enabling operations such as adding, updating, deleting, and retrieving information.
 
-## Features
-1. **Complete CRUD Support**
-2. **Implements DTO Pattern**
-3. **Implements postgresql as database**
-4. **Integration Testing using Test Containers**
-5. **Unit Testing with mockito and junit5**
-6. **API Documentation using swagger**
-   
+## Key Features
+
+1. **Full CRUD Functionality**
+   - Comprehensive Create, Read, Update, and Delete operations
+2. **Data Transfer Object (DTO) Pattern**
+   - Efficient data exchange between layers
+3. **PostgreSQL Database Integration**
+   - Robust and scalable data storage solution
+4. **Advanced Error Handling**
+   - Custom exceptions for specific scenarios
+   - Global error handling for consistent responses
+5. **Comprehensive Testing Suite**
+   - Integration tests using TestContainers for realistic database interactions
+   - Unit tests with Mockito and JUnit 5 for thorough code coverage
+6. **API Documentation**
+   - Interactive API documentation using Swagger/OpenAPI
+7. **Best Practices Implementation**
+   - Adherence to software design principles and industry standards
 
 ## Installation
 
