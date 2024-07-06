@@ -35,9 +35,9 @@ To connect your application to the PostgreSQL database, update the following pro
    spring.datasource.username=<USERNAME>
    spring.datasource.password=<PASSWORD>
    ```
-5. **Build the project:**
+5. **Start The Application**
    ```bash
-   ./mvnw clean install
+   ./mvnw spring-boot:run
 
 ## API Documentation 
 1. **Start The Application**
