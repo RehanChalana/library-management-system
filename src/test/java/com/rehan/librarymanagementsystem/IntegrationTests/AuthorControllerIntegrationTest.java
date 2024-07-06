@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
@@ -80,8 +79,6 @@ public class AuthorControllerIntegrationTest {
         assertNotNull(responseDTOS);
         assertEquals(6,responseDTOS.size());
     }
-
-
 
     @Test
     public void saveNewAuthorTest() {
