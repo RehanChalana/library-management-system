@@ -23,4 +23,11 @@ This project provides a simple REST API for a library management system, develop
    ```bash
    ./mvnw clean install
 
-## API
+## API Documentation 
+1. **Start The Application**
+   ```bash
+   ./mvnw spring-boot:run
+   ```
+2.  Open your web browser and navigate to http://localhost:8080/swagger-ui/index.html
+
+
