@@ -2,6 +2,13 @@
 This project provides a simple REST API for a library management system, developed using Spring Boot. The API allows for efficient management of books, authors, and copies, enabling operations such as adding, updating, deleting, and retrieving information.
 
 ## Features
+1. **Complete CRUD Support**
+2. **Implements DTO Pattern**
+3. **Implements postgresql as database**
+4. **Integration Testing using Test Containers**
+5. **Unit Testing with mockito and junit5**
+6. **API Documentation using swagger**
+   
 
 ## Installation
 
