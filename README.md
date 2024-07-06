@@ -8,17 +8,16 @@ This project provides a simple REST API for a library management system, develop
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/RehanChalana/library-management-system.git
-   cd library-management-system
    ```
-2. **Install Docker Desktop**
-   https://www.docker.com/products/docker-desktop/
-4. **Configure the application properties:**
-   ```bash
+2. **Running PostgreSQL for Integration Testing with Docker Desktop** <br>
+   To run a PostgreSQL image for integration testing, you need to use Docker Desktop. You can download Docker Desktop from the official website: [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+4. **Configure the application properties:** <br>
+To connect your application to the PostgreSQL database, update the following properties in your application configuration file:
+   ```properties
    spring.datasource.url=jdbc:postgresql://<HOST>:<PORT>/<DATABASE_NAME>
    spring.datasource.username=<USERNAME>
    spring.datasource.password=<PASSWORD>
    ```
-   
 5. **Build the project:**
    ```bash
    ./mvnw clean install
@@ -28,6 +27,9 @@ This project provides a simple REST API for a library management system, develop
    ```bash
    ./mvnw spring-boot:run
    ```
-2.  Open your web browser and navigate to http://localhost:8080/swagger-ui/index.html
+2.   **Access API Documentation** <br>
+     Open your web browser and navigate to <br>
+     http://localhost:8080/swagger-ui/index.html
+     
 
 
